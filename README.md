@@ -2,6 +2,6 @@
 
 **CLI reporter of Advent of Code data** 
 
-- "How many people participated in puzzles this year?"
-- "What percentage of people completed both parts of puzzle 14 this year?"
+- "How many soultions were submitted in total this year?"
+- "What percentage of people completed both parts (vs. only part 1) of puzzle 14 this year?"
 - "..."

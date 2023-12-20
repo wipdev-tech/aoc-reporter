@@ -53,17 +53,29 @@ func handleGraph(year int) {
 }
 
 func handleTotal(year int) {
-	total := 0
+	totalBoth := 0
+	totalFirstOnly := 0
 	c := colly.NewCollector()
 
 	c.OnHTML(
-		".stats-both:nth-child(1), .stats-firstonly:nth-child(2)",
+		".stats-both:nth-child(1)",
 		func(e *colly.HTMLElement) {
 			totalInt, err := strconv.Atoi(strings.TrimSpace(e.Text))
 			if err != nil {
 				return
 			}
-			total += totalInt
+			totalBoth += totalInt
+		},
+	)
+
+	c.OnHTML(
+		".stats-firstonly:nth-child(2)",
+		func(e *colly.HTMLElement) {
+			totalInt, err := strconv.Atoi(strings.TrimSpace(e.Text))
+			if err != nil {
+				return
+			}
+			totalFirstOnly += totalInt
 		},
 	)
 
@@ -76,6 +88,8 @@ func handleTotal(year int) {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Total Submissions for %v:\n", year)
-	fmt.Println(total)
+	fmt.Printf("Total Submissions for %v\n", year)
+	fmt.Println("First only  |", totalFirstOnly)
+	fmt.Println("Both parts  |", totalBoth)
+	fmt.Println("Grand total |", totalFirstOnly+totalBoth)
 }
