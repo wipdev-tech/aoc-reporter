@@ -25,6 +25,7 @@ func main() {
 }
 
 func handleGraph(year int) {
+	fmt.Println("Graphing stars per puzzle for year", year)
 	c := colly.NewCollector()
 
 	c.OnHTML(
@@ -53,6 +54,7 @@ func handleGraph(year int) {
 }
 
 func handleTotal(year int) {
+	fmt.Println("Getting total stars earned for year", year)
 	totalBoth := 0
 	totalFirstOnly := 0
 	c := colly.NewCollector()
@@ -88,8 +90,8 @@ func handleTotal(year int) {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Total Submissions for %v\n", year)
-	fmt.Println("First only  |", totalFirstOnly)
-	fmt.Println("Both parts  |", totalBoth)
-	fmt.Println("Grand total |", totalFirstOnly+totalBoth)
+	fmt.Printf("Total stars for %v\n", year)
+	fmt.Println("Silver (1st part) |", totalFirstOnly)
+	fmt.Println("Gold (2nd part)   |", totalBoth)
+	fmt.Println("Grand total       |", totalFirstOnly+totalBoth)
 }
